@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>あさひ塗装|今も、10年後も、納得の施工を。</title>
+<style>
+:root{
+  --navy:#1b3a5c;
+  --navy-light:#2c5f8a;
+  --sky:#eaf2f8;
+  --accent:#e8974f;
+  --accent-dark:#d17f35;
+  --text:#333f4d;
+  --muted:#8a97a5;
+  --bg:#f7f9fb;
+  --white:#ffffff;
+  --radius:18px;
+  --shadow:0 6px 24px rgba(27,58,92,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;color:var(--text);background:var(--bg);line-height:1.7;}
+img{max-width:100%;display:block;}
+button{font-family:inherit;cursor:pointer;}
+
+/* ===== 固定ヘッダー ===== */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(255,255,255,.96);backdrop-filter:blur(8px);
+  box-shadow:0 2px 12px rgba(27,58,92,.08);
+}
+.header-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;}
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer;}
+.logo-mark{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--navy),var(--navy-light));display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;}
+.logo-name{font-weight:700;color:var(--navy);font-size:18px;letter-spacing:.05em;}
+.logo-name small{display:block;font-size:10px;font-weight:500;color:var(--muted);letter-spacing:.1em;}
+nav{display:flex;align-items:center;gap:6px;}
+nav .nav-link{background:none;border:none;padding:8px 14px;border-radius:999px;font-size:14px;color:var(--text);transition:.2s;}
+nav .nav-link:hover,nav .nav-link.active{background:var(--sky);color:var(--navy);font-weight:600;}
+.nav-cta{background:var(--accent);color:#fff;border:none;padding:10px 20px;border-radius:999px;font-size:14px;font-weight:700;transition:.2s;box-shadow:0 3px 10px rgba(232,151,79,.35);}
+.nav-cta:hover{background:var(--accent-dark);transform:translateY(-1px);}
+@media(max-width:820px){nav .nav-link{display:none;}}
+
+/* ===== ページ切替 ===== */
+.page{display:none;padding-top:64px;min-height:100vh;}
+.page.active{display:block;animation:fadeIn .35s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+.container{max-width:1120px;margin:0 auto;padding:0 20px;}
+.section-title{text-align:center;margin:56px 0 8px;font-size:28px;color:var(--navy);}
+.section-sub{text-align:center;color:var(--muted);font-size:14px;margin-bottom:32px;}
+
+/* ===== ヒーロー ===== */
+.hero{
+  position:relative;min-height:calc(100vh - 64px);display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;overflow:hidden;
+}
+.hero-bg{position:absolute;inset:0;z-index:0;}
+.hero-bg svg{width:100%;height:100%;object-fit:cover;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(19,42,66,.55) 0%,rgba(19,42,66,.35) 55%,rgba(19,42,66,.65) 100%);z-index:1;}
+.hero-content{position:relative;z-index:2;padding:40px 20px;}
+.hero-catch{font-size:clamp(30px,5.2vw,54px);font-weight:700;letter-spacing:.06em;text-shadow:0 3px 18px rgba(0,0,0,.35);line-height:1.5;}
+.hero-lead{margin-top:18px;font-size:clamp(14px,1.8vw,17px);opacity:.95;text-shadow:0 2px 10px rgba(0,0,0,.4);}
+.hero-badges{margin-top:26px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.hero-badge{background:rgba(255,255,255,.92);color:var(--navy);border-radius:999px;padding:8px 20px;font-size:13px;font-weight:700;box-shadow:var(--shadow);}
+.hero-badge.orange{background:var(--accent);color:#fff;}
+.hero-scroll{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:2;color:#fff;font-size:12px;opacity:.85;animation:bob 2s infinite;}
+@keyframes bob{0%,100%{transform:translate(-50%,0);}50%{transform:translate(-50%,7px);}}
+
+/* ===== 2枠カード ===== */
+.entry-cards{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:-70px auto 0;position:relative;z-index:5;max-width:920px;padding:0 20px;}
+@media(max-width:720px){.entry-cards{grid-template-columns:1fr;margin-top:-40px;}}
+.entry-card{
+  background:var(--white);border-radius:24px;padding:34px 30px;box-shadow:var(--shadow);
+  text-align:center;cursor:pointer;transition:.25s;border:2px solid transparent;
+}
+.entry-card:hover{transform:translateY(-5px);border-color:var(--navy-light);box-shadow:0 12px 32px rgba(27,58,92,.18);}
+.entry-card .icon{font-size:40px;margin-bottom:10px;}
+.entry-card h3{color:var(--navy);font-size:20px;margin-bottom:8px;}
+.entry-card p{font-size:13px;color:var(--muted);margin-bottom:18px;}
+.entry-btn{display:inline-block;background:var(--navy);color:#fff;border:none;border-radius:999px;padding:12px 34px;font-size:15px;font-weight:700;transition:.2s;}
+.entry-card:hover .entry-btn{background:var(--accent);}
+
+/* ===== 安心セクション ===== */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:64px 0;}
+@media(max-width:720px){.trust{grid-template-columns:1fr;}}
+.trust-item{background:var(--white);border-radius:var(--radius);padding:28px 22px;text-align:center;box-shadow:var(--shadow);}
+.trust-item .t-icon{width:60px;height:60px;margin:0 auto 12px;border-radius:50%;background:var(--sky);display:flex;align-items:center;justify-content:center;font-size:28px;}
+.trust-item h4{color:var(--navy);font-size:16px;margin-bottom:6px;}
+.trust-item p{font-size:13px;color:var(--muted);}
+
+/* ===== シミュレーター ===== */
+.sim-layout{display:grid;grid-template-columns:1fr 340px;gap:28px;align-items:start;margin-bottom:80px;}
+@media(max-width:900px){.sim-layout{grid-template-columns:1fr;}}
+.sim-group{margin-bottom:36px;}
+.sim-group h3{color:var(--navy);font-size:19px;margin-bottom:4px;}
+.sim-group .g-note{font-size:12px;color:var(--muted);margin-bottom:14px;}
+.opt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;}
+.opt-card{
+  background:var(--white);border:2px solid #e3eaf1;border-radius:var(--radius);padding:0;overflow:hidden;
+  cursor:pointer;transition:.2s;position:relative;
+}
+.opt-card:hover{border-color:var(--navy-light);}
+.opt-card.selected{border-color:var(--navy);box-shadow:0 6px 18px rgba(27,58,92,.16);}
+.opt-card.selected::after{content:"✓";position:absolute;top:10px;right:10px;width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;}
+.opt-img{height:96px;display:flex;align-items:center;justify-content:center;font-size:40px;}
+.opt-body{padding:12px 14px 14px;}
+.opt-body h5{font-size:15px;color:var(--navy);margin-bottom:2px;}
+.opt-body .desc{font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:6px;}
+.opt-body .price{font-size:14px;font-weight:700;color:var(--accent-dark);}
+.sim-summary{
+  position:sticky;top:84px;background:var(--white);border-radius:24px;box-shadow:var(--shadow);padding:26px 24px;
+}
+.sim-summary h3{color:var(--navy);font-size:17px;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid var(--sky);}
+.sum-line{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;color:var(--text);}
+.sum-line .l-price{font-weight:600;white-space:nowrap;margin-left:10px;}
+.sum-total{margin-top:14px;padding-top:14px;border-top:2px solid var(--sky);display:flex;justify-content:space-between;align-items:baseline;}
+.sum-total .label{font-size:14px;font-weight:700;color:var(--navy);}
+.sum-total .value{font-size:28px;font-weight:800;color:var(--navy);transition:.2s;}
+.sum-total .value.bump{transform:scale(1.08);color:var(--accent-dark);}
+.sum-note{font-size:11px;color:var(--muted);margin-top:10px;}
+.sum-cta{width:100%;margin-top:16px;background:var(--accent);color:#fff;border:none;border-radius:999px;padding:14px;font-size:15px;font-weight:700;transition:.2s;}
+.sum-cta:hover{background:var(--accent-dark);}
+
+/* ===== 予約 ===== */
+.staff-scroller{display:flex;gap:16px;overflow-x:auto;padding:6px 4px 18px;scroll-snap-type:x mandatory;}
+.staff-scroller::-webkit-scrollbar{height:8px;}
+.staff-scroller::-webkit-scrollbar-thumb{background:#cdd9e4;border-radius:4px;}
+.staff-card{
+  flex:0 0 210px;scroll-snap-align:start;background:var(--white);border:2px solid #e3eaf1;border-radius:20px;
+  padding:20px 16px;text-align:center;cursor:pointer;transition:.2s;position:relative;
+}
+.staff-card:hover{border-color:var(--navy-light);}
+.staff-card.selected{border-color:var(--navy);box-shadow:0 6px 18px rgba(27,58,92,.16);}
+.staff-card.selected::after{content:"指名中";position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;font-size:11px;padding:2px 12px;border-radius:999px;}
+.staff-photo{width:86px;height:86px;border-radius:50%;margin:0 auto 10px;overflow:hidden;border:3px solid var(--sky);}
+.staff-card h5{color:var(--navy);font-size:15px;}
+.staff-card .role{font-size:11px;color:var(--accent-dark);font-weight:600;margin-bottom:6px;}
+.staff-card .greet{font-size:11.5px;color:var(--muted);line-height:1.55;}
+.staff-nav{display:flex;justify-content:flex-end;gap:8px;margin-bottom:8px;}
+.staff-nav button{width:36px;height:36px;border-radius:50%;border:1.5px solid #cdd9e4;background:#fff;color:var(--navy);font-size:15px;transition:.2s;}
+.staff-nav button:hover{background:var(--sky);}
+.cal-wrap{background:var(--white);border-radius:24px;box-shadow:var(--shadow);padding:22px;overflow-x:auto;margin-bottom:26px;}
+.cal-table{border-collapse:separate;border-spacing:4px;min-width:760px;width:100%;}
+.cal-table th{font-size:12px;color:var(--navy);padding:6px 2px;font-weight:600;white-space:nowrap;}
+.cal-table th .dow{display:block;font-size:10px;color:var(--muted);}
+.cal-table th .dow.sat{color:#3a7bbd;} .cal-table th .dow.sun{color:#d1604f;}
+.cal-table td.time{font-size:12px;color:var(--muted);white-space:nowrap;padding-right:8px;text-align:right;}
+.slot{width:100%;height:34px;border:none;border-radius:10px;background:var(--sky);color:var(--navy-light);font-size:13px;transition:.15s;}
+.slot:hover{background:#d3e5f3;}
+.slot.na{background:#f0f1f3;color:#c2c8cf;cursor:not-allowed;}
+.slot.selected{background:var(--navy);color:#fff;font-weight:700;}
+.reserve-form{background:var(--white);border-radius:24px;box-shadow:var(--shadow);padding:28px;margin-bottom:80px;}
+.reserve-form h3{color:var(--navy);font-size:17px;margin-bottom:16px;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:640px){.form-grid{grid-template-columns:1fr;}}
+.form-grid label{font-size:12px;color:var(--muted);display:block;margin-bottom:4px;}
+.form-grid input,.form-grid select,.form-grid textarea{
+  width:100%;padding:11px 14px;border:1.5px solid #dbe4ec;border-radius:12px;font-size:14px;font-family:inherit;background:#fbfcfe;
+}
+.form-grid input:focus,.form-grid textarea:focus{outline:none;border-color:var(--navy-light);}
+.reserve-selected{background:var(--sky);border-radius:14px;padding:12px 18px;font-size:13.5px;color:var(--navy);margin-bottom:16px;font-weight:600;}
+.reserve-submit{margin-top:18px;background:var(--accent);color:#fff;border:none;border-radius:999px;padding:14px 44px;font-size:15px;font-weight:700;transition:.2s;}
+.reserve-submit:hover{background:var(--accent-dark);}
+
+/* ===== 施工事例 ===== */
+.count-banner{background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:24px;color:#fff;text-align:center;padding:36px 20px;margin:24px 0 40px;box-shadow:var(--shadow);}
+.count-banner .num{font-size:52px;font-weight:800;letter-spacing:.02em;}
+.count-banner .num small{font-size:20px;font-weight:600;margin-left:4px;}
+.count-banner .cap{font-size:13px;opacity:.85;}
+.works-scroller{display:flex;gap:18px;overflow-x:auto;padding:6px 4px 18px;scroll-snap-type:x mandatory;}
+.works-scroller::-webkit-scrollbar{height:8px;}
+.works-scroller::-webkit-scrollbar-thumb{background:#cdd9e4;border-radius:4px;}
+.work-card{flex:0 0 300px;scroll-snap-align:start;background:var(--white);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:.2s;border:2px solid transparent;}
+.work-card:hover{transform:translateY(-4px);border-color:var(--navy-light);}
+.work-thumb{height:170px;}
+.work-thumb svg{width:100%;height:100%;}
+.work-body{padding:14px 16px 18px;}
+.work-body .tag{display:inline-block;background:var(--sky);color:var(--navy);font-size:11px;font-weight:700;border-radius:999px;padding:2px 12px;margin-bottom:6px;}
+.work-body h5{font-size:15px;color:var(--navy);margin-bottom:2px;}
+.work-body p{font-size:12px;color:var(--muted);}
+.work-more{font-size:12px;color:var(--accent-dark);font-weight:700;margin-top:6px;}
+
+/* ===== モーダル ===== */
+.modal-bg{position:fixed;inset:0;background:rgba(19,42,66,.55);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px;}
+.modal-bg.open{display:flex;}
+.modal{background:#fff;border-radius:24px;max-width:640px;width:100%;max-height:86vh;overflow-y:auto;padding:30px;position:relative;animation:fadeIn .25s;}
+.modal-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;border:none;background:var(--sky);color:var(--navy);font-size:16px;}
+.modal .tag{display:inline-block;background:var(--sky);color:var(--navy);font-size:11px;font-weight:700;border-radius:999px;padding:2px 12px;margin-bottom:8px;}
+.modal h3{color:var(--navy);font-size:20px;margin-bottom:12px;}
+.modal-thumb{border-radius:16px;overflow:hidden;margin-bottom:16px;}
+.modal-thumb svg{width:100%;height:200px;}
+.modal dl{font-size:13.5px;margin-bottom:16px;}
+.modal dt{font-weight:700;color:var(--navy);margin-top:10px;}
+.modal dd{color:var(--text);}
+.voice-box{background:var(--sky);border-radius:16px;padding:18px 20px;}
+.voice-box .v-head{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+.voice-box p{font-size:13.5px;}
+.stars{color:#f0a63a;letter-spacing:2px;margin-bottom:4px;}
+
+/* ===== エンディング ===== */
+.info-links{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:32px 0 26px;}
+@media(max-width:720px){.info-links{grid-template-columns:1fr;}}
+.info-link{background:var(--white);border-radius:20px;padding:30px 24px;box-shadow:var(--shadow);cursor:pointer;transition:.2s;border:2px solid transparent;text-align:center;}
+.info-link:hover{transform:translateY(-4px);border-color:var(--navy-light);}
+.info-link .i-icon{font-size:30px;margin-bottom:8px;}
+.info-link h4{font-weight:800;font-size:18px;color:var(--navy);margin-bottom:4px;}
+.info-link p{font-size:12px;color:var(--muted);}
+.privacy-link{display:block;margin:0 auto 60px;background:none;border:none;color:#b3bcc6;font-size:12px;font-weight:300;text-decoration:underline;text-underline-offset:3px;}
+.privacy-link:hover{color:var(--muted);}
+.subpage-body{background:var(--white);border-radius:24px;box-shadow:var(--shadow);padding:34px;margin-bottom:80px;}
+.subpage-body h3{color:var(--navy);margin-bottom:16px;font-size:20px;}
+.subpage-body table{width:100%;border-collapse:collapse;font-size:14px;}
+.subpage-body table th{text-align:left;width:160px;color:var(--navy);padding:12px 10px;border-bottom:1px solid #e8eef4;vertical-align:top;white-space:nowrap;}
+.subpage-body table td{padding:12px 10px;border-bottom:1px solid #e8eef4;}
+.subpage-body .news-item{padding:16px 4px;border-bottom:1px solid #e8eef4;}
+.subpage-body .news-item .date{font-size:12px;color:var(--muted);margin-right:14px;}
+.subpage-body .news-item .n-tag{font-size:11px;background:var(--sky);color:var(--navy);border-radius:999px;padding:1px 10px;margin-right:10px;font-weight:700;}
+.subpage-body h4{color:var(--navy);margin:22px 0 8px;font-size:16px;}
+.subpage-body p,.subpage-body li{font-size:14px;}
+.subpage-body ul{padding-left:22px;}
+.back-btn{background:var(--sky);color:var(--navy);border:none;border-radius:999px;padding:10px 26px;font-size:13px;font-weight:700;margin-bottom:20px;}
+.back-btn:hover{background:#d3e5f3;}
+
+/* ===== ホーム:フルサイズセクション ===== */
+.home-sec{min-height:calc(100vh - 64px);display:flex;flex-direction:column;justify-content:center;padding:56px 0;}
+.home-sec:nth-of-type(even){background:var(--white);}
+.sec-label{display:inline-flex;align-items:center;gap:10px;margin:0 auto 6px;background:var(--sky);color:var(--navy);border-radius:999px;padding:6px 20px;font-size:12.5px;font-weight:700;letter-spacing:.08em;}
+.sec-label .n{background:var(--navy);color:#fff;border-radius:999px;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:11px;}
+.sec-head{text-align:center;}
+.home-sec .section-title{margin:8px 0 6px;}
+.sec-more{display:block;margin:26px auto 0;background:var(--navy);color:#fff;border:none;border-radius:999px;padding:13px 38px;font-size:14.5px;font-weight:700;transition:.2s;}
+.sec-more:hover{background:var(--accent);transform:translateY(-1px);}
+.entry-cards.in-sec{margin:8px auto 0;padding:0;}
+.home-sec .trust{margin:34px 0 0;}
+.home-sec .count-banner{margin:8px 0 26px;}
+
+footer{background:var(--navy);color:#cfdce8;text-align:center;padding:30px 20px;font-size:12px;}
+footer .f-aimitsu{display:inline-block;background:rgba(255,255,255,.12);border-radius:999px;padding:6px 20px;margin-bottom:12px;font-size:12.5px;color:#fff;}
+
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--navy);color:#fff;border-radius:999px;padding:13px 30px;font-size:14px;box-shadow:var(--shadow);z-index:3000;opacity:0;transition:.35s;}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="logo" onclick="showPage('home')">
+      <div class="logo-mark">🏠</div>
+      <div class="logo-name">あさひ塗装<small>ASAHI TOSO Co.,Ltd.</small></div>
+    </div>
+    <nav>
+      <button class="nav-link" data-page="home" onclick="showPage('home')">ホーム</button>
+      <button class="nav-link" data-page="sim" onclick="showPage('sim')">見積もりシミュレーション</button>
+      <button class="nav-link" data-page="works" onclick="showPage('works')">施工事例</button>
+      <button class="nav-link" data-page="info" onclick="showPage('info')">会社案内</button>
+      <button class="nav-cta" onclick="showPage('reserve')">見積もり依頼</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= ① ブランディングページ ================= -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-bg">
+      <svg viewBox="0 0 1440 810" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#8fbcdd"/><stop offset=".55" stop-color="#c9dff0"/><stop offset="1" stop-color="#f3e9d8"/>
+          </linearGradient>
+          <linearGradient id="wall1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fdfbf6"/><stop offset="1" stop-color="#e8e2d4"/>
+          </linearGradient>
+        </defs>
+        <rect width="1440" height="810" fill="url(#sky)"/>
+        <circle cx="1150" cy="150" r="70" fill="#fff5d6" opacity=".9"/>
+        <ellipse cx="300" cy="180" rx="130" ry="34" fill="#fff" opacity=".75"/>
+        <ellipse cx="820" cy="110" rx="100" ry="26" fill="#fff" opacity=".6"/>
+        <ellipse cx="560" cy="230" rx="80" ry="20" fill="#fff" opacity=".5"/>
+        <!-- 遠景の街並み -->
+        <g opacity=".45" fill="#7d9db8">
+          <rect x="0" y="560" width="120" height="250"/><rect x="150" y="600" width="90" height="210"/>
+          <rect x="1230" y="580" width="110" height="230"/><rect x="1360" y="610" width="80" height="200"/>
+        </g>
+        <!-- メインの家 -->
+        <g>
+          <polygon points="720,300 460,470 980,470" fill="#4a6f8f"/>
+          <rect x="500" y="470" width="440" height="340" fill="url(#wall1)"/>
+          <rect x="560" y="530" width="90" height="90" rx="8" fill="#a8cbe4"/>
+          <rect x="790" y="530" width="90" height="90" rx="8" fill="#a8cbe4"/>
+          <rect x="665" y="640" width="110" height="170" rx="8" fill="#5b7c96"/>
+          <circle cx="757" cy="728" r="6" fill="#e8d9a8"/>
+        </g>
+        <!-- 隣家 -->
+        <g opacity=".85">
+          <polygon points="240,430 110,540 370,540" fill="#5d82a1"/>
+          <rect x="140" y="540" width="200" height="270" fill="#efe9dc"/>
+          <rect x="175" y="580" width="55" height="55" rx="6" fill="#b3d0e6"/>
+          <rect x="255" y="580" width="55" height="55" rx="6" fill="#b3d0e6"/>
+        </g>
+        <g opacity=".85">
+          <polygon points="1190,440 1070,545 1310,545" fill="#5d82a1"/>
+          <rect x="1095" y="545" width="190" height="265" fill="#efe9dc"/>
+          <rect x="1128" y="585" width="52" height="52" rx="6" fill="#b3d0e6"/>
+          <rect x="1205" y="585" width="52" height="52" rx="6" fill="#b3d0e6"/>
+        </g>
+        <rect y="780" width="1440" height="30" fill="#9bb3a2"/>
+        <!-- ローラーの塗り跡 -->
+        <path d="M500 470 h180 v340 h-180 z" fill="#f0b478" opacity=".35"/>
+      </svg>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-catch">今も、10年後も、<br>納得の施工を。</h1>
+      <p class="hero-lead">初めての外壁塗装、わからないことだらけで当たり前です。<br>あさひ塗装は、価格も工事もぜんぶ「見える」塗装店です。</p>
+      <div class="hero-badges">
+        <span class="hero-badge orange">相見積もり大歓迎</span>
+        <span class="hero-badge">自社職人施工</span>
+        <span class="hero-badge">最長15年保証</span>
+        <span class="hero-badge">地域施工実績 2,850件</span>
+      </div>
+    </div>
+    <div class="hero-scroll">▼ スクロール</div>
+  </div>
+
+  <!-- ② お見積もり(フルサイズ) -->
+  <section class="home-sec">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-label"><span class="n">2</span>お見積もり</span>
+        <h2 class="section-title">まずは、金額の不安から解消。</h2>
+        <p class="section-sub">外壁塗装が初めてのお客様が9割。「いくらかかるの?」からご案内します。</p>
+      </div>
+      <div class="entry-cards in-sec">
+        <div class="entry-card" onclick="showPage('sim')">
+          <div class="icon">🧮</div>
+          <h3>見積もりシミュレーション</h3>
+          <p>その場で概算価格がわかる。営業連絡は一切ありません。<br>まずは相場感をつかみたい方へ。</p>
+          <span class="entry-btn">シミュレーションする →</span>
+        </div>
+        <div class="entry-card" onclick="showPage('reserve')">
+          <div class="icon">📅</div>
+          <h3>見積もり依頼</h3>
+          <p>担当者を指名して、ご都合のよい日時を予約。<br>現地調査・お見積もりは無料です。</p>
+          <span class="entry-btn">予約カレンダーへ →</span>
+        </div>
+      </div>
+      <div class="trust">
+        <div class="trust-item">
+          <div class="t-icon">📋</div>
+          <h4>相見積もりOK</h4>
+          <p>他社との比較、むしろおすすめしています。見積書はすべて項目別で開示します。</p>
+        </div>
+        <div class="trust-item">
+          <div class="t-icon">👷</div>
+          <h4>自社職人が最後まで</h4>
+          <p>下請けに丸投げしません。担当者と職人が着工から完工までそのまま担当します。</p>
+        </div>
+        <div class="trust-item">
+          <div class="t-icon">🛡️</div>
+          <h4>最長15年の工事保証</h4>
+          <p>1年・5年・10年の無料定期点検つき。「10年後も納得」を保証書でお約束します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ③ 施工事例(フルサイズ) -->
+  <section class="home-sec">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-label"><span class="n">3</span>施工事例とお客様の声</span>
+        <h2 class="section-title">実績が、いちばんの安心材料。</h2>
+        <p class="section-sub">写真をクリックすると、施工内容とお客様の声がご覧いただけます。</p>
+      </div>
+      <div class="count-banner">
+        <div class="cap">地域の皆さまに選ばれて、累計施工件数</div>
+        <div class="num" id="work-count-home">0<small>件</small></div>
+      </div>
+      <div class="staff-nav">
+        <button onclick="scrollWorks(-1,'works-scroller-home')" aria-label="前へ">‹</button>
+        <button onclick="scrollWorks(1,'works-scroller-home')" aria-label="次へ">›</button>
+      </div>
+      <div class="works-scroller" id="works-scroller-home"></div>
+      <button class="sec-more" onclick="showPage('works')">施工事例をすべて見る →</button>
+    </div>
+  </section>
+
+  <!-- ④ エンディング(フルサイズ) -->
+  <section class="home-sec">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-label"><span class="n">4</span>あさひ塗装について</span>
+        <h2 class="section-title">私たちのことも、知ってください。</h2>
+        <p class="section-sub">会社のこと、働く仲間のこと、最新のお知らせはこちらから。</p>
+      </div>
+      <div class="info-links">
+        <div class="info-link" onclick="showPage('company')">
+          <div class="i-icon">🏢</div><h4>会社概要</h4><p>所在地・許可番号・保有資格など</p>
+        </div>
+        <div class="info-link" onclick="showPage('recruit')">
+          <div class="i-icon">🤝</div><h4>採用情報</h4><p>未経験歓迎。一緒に働く仲間を募集中</p>
+        </div>
+        <div class="info-link" onclick="showPage('news')">
+          <div class="i-icon">📰</div><h4>最新ニュース</h4><p>キャンペーン・休業日のお知らせ</p>
+        </div>
+      </div>
+      <button class="privacy-link" style="margin-bottom:0;" onclick="showPage('privacy')">プライバシーポリシー</button>
+    </div>
+  </section>
+</div>
+
+<!-- ================= ② 見積もりシミュレーション ================= -->
+<div class="page" id="page-sim">
+  <div class="container">
+    <h2 class="section-title">概算見積もりシミュレーション</h2>
+    <p class="section-sub">選ぶだけで、右側の価格がリアルタイムに更新されます。お名前などの入力は不要です。</p>
+    <div class="sim-layout">
+      <div>
+        <div class="sim-group">
+          <h3>1. お住まいの大きさ</h3>
+          <p class="g-note">延床面積のおおよそで構いません。足場・高圧洗浄・養生の費用も自動で含まれます。</p>
+          <div class="opt-grid" id="size-grid"></div>
+        </div>
+        <div class="sim-group">
+          <h3>2. 塗料を選ぶ</h3>
+          <p class="g-note">迷ったら「ラジカルシリコン」。価格と耐久性のバランスで一番選ばれています。</p>
+          <div class="opt-grid" id="paint-grid"></div>
+        </div>
+        <div class="sim-group">
+          <h3>3. オプションを追加する</h3>
+          <p class="g-note">クリックで追加・解除できます。外壁と同時施工なら足場代が1回分で済むため単独工事よりお得です。</p>
+          <div class="opt-grid" id="option-grid"></div>
+        </div>
+      </div>
+      <aside class="sim-summary">
+        <h3>お見積もり概算</h3>
+        <div id="sum-lines"></div>
+        <div class="sum-total"><span class="label">合計(税込)</span><span class="value" id="sum-total">¥0</span></div>
+        <p class="sum-note">※ 一般的な2階建て住宅を想定した概算です。正式なお見積もりは無料の現地調査にて、劣化状況を拝見したうえでご提示します。概算より高くなる場合は必ず事前にご説明します。</p>
+        <button class="sum-cta" onclick="showPage('reserve')">この内容で見積もり依頼へ →</button>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- ================= ② 見積もり依頼(予約) ================= -->
+<div class="page" id="page-reserve">
+  <div class="container">
+    <h2 class="section-title">見積もり依頼(無料現地調査のご予約)</h2>
+    <p class="section-sub">担当者を指名 → ご都合のよい日時をタップ → お客様情報を入力。所要1分です。</p>
+
+    <h3 style="color:var(--navy);font-size:18px;margin:10px 0 2px;">STEP 1|担当者を指名する</h3>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">全員が自社の診断士です。押し売りは一切いたしません。</p>
+    <div class="staff-nav">
+      <button onclick="scrollStaff(-1)" aria-label="前へ">‹</button>
+      <button onclick="scrollStaff(1)" aria-label="次へ">›</button>
+    </div>
+    <div class="staff-scroller" id="staff-scroller"></div>
+
+    <h3 style="color:var(--navy);font-size:18px;margin:26px 0 2px;">STEP 2|日時を選ぶ</h3>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:12px;">「○」の枠をタップしてください。土日も対応しています。</p>
+    <div class="cal-wrap"><table class="cal-table" id="cal-table"></table></div>
+
+    <div class="reserve-form">
+      <h3>STEP 3|お客様情報を入力する</h3>
+      <div class="reserve-selected" id="reserve-selected">担当者と日時を選ぶと、ここに予約内容が表示されます。</div>
+      <div class="form-grid">
+        <div><label>お名前 *</label><input type="text" id="f-name" placeholder="山田 太郎"></div>
+        <div><label>電話番号 *</label><input type="tel" id="f-tel" placeholder="090-1234-5678"></div>
+        <div><label>メールアドレス</label><input type="email" id="f-mail" placeholder="taro@example.com"></div>
+        <div><label>ご住所(市区町村まででOK)</label><input type="text" id="f-addr" placeholder="旭市〇〇町"></div>
+        <div style="grid-column:1/-1;"><label>ご相談内容(任意)</label><textarea id="f-memo" rows="3" placeholder="例:築12年・そろそろ塗り替え時期か見てほしい。他社の見積もりが適正か知りたい。など"></textarea></div>
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin-top:12px;">✓ 相見積もり中の方も大歓迎です。他社様のお見積もりの診断だけでも承ります。</p>
+      <button class="reserve-submit" onclick="submitReserve()">この内容で予約する</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= ③ 施工事例とお客様の声 ================= -->
+<div class="page" id="page-works">
+  <div class="container">
+    <h2 class="section-title">施工事例とお客様の声</h2>
+    <p class="section-sub">写真をクリックすると、施工内容とお客様の声がご覧いただけます。</p>
+    <div class="count-banner">
+      <div class="cap">地域の皆さまに選ばれて、累計施工件数</div>
+      <div class="num" id="work-count">0<small>件</small></div>
+      <div class="cap">(2026年6月末時点/創業以来)</div>
+    </div>
+    <div class="staff-nav">
+      <button onclick="scrollWorks(-1)" aria-label="前へ">‹</button>
+      <button onclick="scrollWorks(1)" aria-label="次へ">›</button>
+    </div>
+    <div class="works-scroller" id="works-scroller"></div>
+    <div style="text-align:center;margin:30px 0 80px;">
+      <button class="entry-btn" style="background:var(--accent);" onclick="showPage('reserve')">わが家の場合はいくら?無料で相談する</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= ④ エンディングページ ================= -->
+<div class="page" id="page-info">
+  <div class="container">
+    <h2 class="section-title">あさひ塗装について</h2>
+    <p class="section-sub">会社のこと、働く仲間のこと、最新のお知らせはこちらから。</p>
+    <div class="info-links">
+      <div class="info-link" onclick="showPage('company')">
+        <div class="i-icon">🏢</div><h4>会社概要</h4><p>所在地・許可番号・保有資格など</p>
+      </div>
+      <div class="info-link" onclick="showPage('recruit')">
+        <div class="i-icon">🤝</div><h4>採用情報</h4><p>未経験歓迎。一緒に働く仲間を募集中</p>
+      </div>
+      <div class="info-link" onclick="showPage('news')">
+        <div class="i-icon">📰</div><h4>最新ニュース</h4><p>キャンペーン・休業日のお知らせ</p>
+      </div>
+    </div>
+    <button class="privacy-link" onclick="showPage('privacy')">プライバシーポリシー</button>
+  </div>
+</div>
+
+<!-- サブページ:会社概要 -->
+<div class="page" id="page-company">
+  <div class="container">
+    <h2 class="section-title">会社概要</h2><p class="section-sub"></p>
+    <button class="back-btn" onclick="showPage('info')">← 会社案内へ戻る</button>
+    <div class="subpage-body">
+      <table>
+        <tr><th>会社名</th><td>株式会社あさひ塗装</td></tr>
+        <tr><th>代表者</th><td>代表取締役 朝日 誠一</td></tr>
+        <tr><th>創業</th><td>1998年4月(創業28年)</td></tr>
+        <tr><th>所在地</th><td>〒289-2504 千葉県旭市あさひ台1-2-3</td></tr>
+        <tr><th>電話</th><td>0120-XXX-XXX(受付 9:00〜18:00/水曜定休)</td></tr>
+        <tr><th>建設業許可</th><td>千葉県知事許可(般-XX)第XXXXX号(塗装工事業)</td></tr>
+        <tr><th>保有資格</th><td>一級塗装技能士 4名/外壁劣化診断士 3名/雨漏り診断士 2名</td></tr>
+        <tr><th>事業内容</th><td>外壁塗装・屋根塗装・防水工事・シーリング工事・雨樋交換</td></tr>
+        <tr><th>対応エリア</th><td>旭市・銚子市・匝瑳市・香取市・東庄町ほか近隣地域</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- サブページ:採用情報 -->
+<div class="page" id="page-recruit">
+  <div class="container">
+    <h2 class="section-title">採用情報</h2><p class="section-sub"></p>
+    <button class="back-btn" onclick="showPage('info')">← 会社案内へ戻る</button>
+    <div class="subpage-body">
+      <h3>「ありがとう」が聞こえる仕事、はじめませんか。</h3>
+      <p>あさひ塗装は下請けに出さない自社施工の会社です。だからこそ、お客様の「きれいになったね」を直接聞けるのがこの仕事のいちばんの報酬です。未経験の方も、先輩職人がマンツーマンで教えます。</p>
+      <h4>募集職種</h4>
+      <ul>
+        <li>塗装職人(経験者・未経験者とも歓迎)/月給25万円〜45万円</li>
+        <li>外壁診断士・営業(ノルマなし・反響対応のみ)/月給28万円〜</li>
+      </ul>
+      <h4>待遇・福利厚生</h4>
+      <ul>
+        <li>社会保険完備・資格取得費用は全額会社負担(一級塗装技能士など)</li>
+        <li>完全週休2日制(日曜+平日1日)・年間休日105日</li>
+      </ul>
+      <p style="margin-top:16px;">応募・見学のご希望は <strong>recruit@asahi-toso.example.jp</strong> まで。「HPを見た」とお伝えください。</p>
+    </div>
+  </div>
+</div>
+
+<!-- サブページ:最新ニュース -->
+<div class="page" id="page-news">
+  <div class="container">
+    <h2 class="section-title">最新ニュース</h2><p class="section-sub"></p>
+    <button class="back-btn" onclick="showPage('info')">← 会社案内へ戻る</button>
+    <div class="subpage-body">
+      <div class="news-item"><span class="date">2026.07.01</span><span class="n-tag">キャンペーン</span>夏の塗り替え応援!7月中の現地調査ご予約で、シーリング打ち替え10%オフ。</div>
+      <div class="news-item"><span class="date">2026.06.15</span><span class="n-tag">お知らせ</span>ホームページをリニューアルしました。概算見積もりシミュレーションをぜひお試しください。</div>
+      <div class="news-item"><span class="date">2026.05.20</span><span class="n-tag">実績</span>累計施工件数が2,850件を突破しました。地域の皆さまに心より感謝申し上げます。</div>
+      <div class="news-item"><span class="date">2026.04.10</span><span class="n-tag">お知らせ</span>ゴールデンウィーク期間(5/3〜5/6)は休業いたします。</div>
+    </div>
+  </div>
+</div>
+
+<!-- サブページ:プライバシーポリシー -->
+<div class="page" id="page-privacy">
+  <div class="container">
+    <h2 class="section-title">プライバシーポリシー</h2><p class="section-sub"></p>
+    <button class="back-btn" onclick="showPage('info')">← 会社案内へ戻る</button>
+    <div class="subpage-body">
+      <p>株式会社あさひ塗装(以下「当社」)は、お客様の個人情報を以下の方針に基づき取り扱います。</p>
+      <h4>1. 取得する情報と利用目的</h4>
+      <p>お見積もり・現地調査のご予約時にいただくお名前・ご連絡先・ご住所は、日程調整、お見積もりのご提示、工事のご連絡にのみ利用します。</p>
+      <h4>2. 第三者提供</h4>
+      <p>法令に基づく場合を除き、ご本人の同意なく第三者に提供することはありません。</p>
+      <h4>3. お問い合わせ窓口</h4>
+      <p>個人情報の開示・訂正・削除のご請求は、0120-XXX-XXX までご連絡ください。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 事例モーダル -->
+<div class="modal-bg" id="modal-bg" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<footer>
+  <span class="f-aimitsu">📋 相見積もりOK|他社様のお見積もりと、じっくり比べてください。</span><br>
+  © 2026 ASAHI TOSO Co.,Ltd. 千葉県旭市あさひ台1-2-3|0120-XXX-XXX
+</footer>
+
+<div class="toast" id="toast"></div>
+<script>
+/* ================= ページ切替 ================= */
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(b=>b.classList.toggle('active',b.dataset.page===id));
+  window.scrollTo({top:0});
+}
+
+const yen = n => '¥' + n.toLocaleString('ja-JP');
+
+/* ================= 見積もりシミュレーション ================= */
+const SIZES = [
+  {id:'s25', name:'〜25坪', desc:'コンパクトな2階建て・平屋(延床 約82㎡まで)', price:-80000, icon:'🏠'},
+  {id:'s30', name:'26〜32坪(標準)', desc:'もっとも多い標準的な2階建て(延床 約105㎡前後)', price:0, icon:'🏡'},
+  {id:'s35', name:'33〜39坪', desc:'ゆとりある2階建て(延床 約122㎡前後)', price:90000, icon:'🏘️'},
+  {id:'s40', name:'40坪〜', desc:'大きめのお住まい・二世帯住宅など', price:170000, icon:'🏰'},
+];
+const PAINTS = [
+  {id:'p-sil', name:'シリコン', desc:'耐用年数 約8〜10年。費用を抑えたい方に。', price:680000, icon:'🖌️', tint:'#eef4f9'},
+  {id:'p-rad', name:'ラジカルシリコン', desc:'耐用年数 約12〜14年。人気No.1のバランス型。', price:750000, icon:'⭐', tint:'#fdf3e7'},
+  {id:'p-flu', name:'フッ素', desc:'耐用年数 約15〜18年。塗り替え回数を減らしたい方に。', price:880000, icon:'💎', tint:'#eef9f4'},
+  {id:'p-ino', name:'無機', desc:'耐用年数 約20年〜。最高クラスの耐久性。', price:980000, icon:'🛡️', tint:'#f3effa'},
+];
+const OPTIONS = [
+  {id:'o-roof', name:'屋根塗装', desc:'外壁と同時なら足場代1回分。遮熱塗料で夏も快適に。', price:250000, icon:'🏚️'},
+  {id:'o-noki', name:'軒天の塗装', desc:'屋根の裏側の白い天井部分。湿気による剥がれを防ぎます。', price:45000, icon:'🪜'},
+  {id:'o-toi', name:'雨樋の交換', desc:'歪み・詰まりがある場合に。塗装では直らない劣化に対応。', price:120000, icon:'🌧️'},
+  {id:'o-seal', name:'シーリング打ち替え', desc:'外壁の目地のゴム部分。ひび割れは雨漏りの原因に。', price:110000, icon:'🧴'},
+  {id:'o-bera', name:'ベランダ防水', desc:'床面のトップコート再施工で防水層を長持ちさせます。', price:60000, icon:'🌤️'},
+];
+const sim = { size:'s30', paint:'p-rad', options:new Set() };
+
+function optCard(item, type, selected){
+  return `<div class="opt-card ${selected?'selected':''}" onclick="pickSim('${type}','${item.id}')">
+    <div class="opt-img" style="background:${item.tint||'var(--sky)'}">${item.icon}</div>
+    <div class="opt-body"><h5>${item.name}</h5><div class="desc">${item.desc}</div>
+    <div class="price">${item.price===0?'標準':(item.price>0&&type==='option'?'+':'')+(type==='size'?(item.price>0?'+':'')+yen(Math.abs(item.price)).replace('¥',item.price<0?'−¥':'¥'):yen(item.price))}</div></div></div>`;
+}
+function renderSim(){
+  document.getElementById('size-grid').innerHTML = SIZES.map(s=>optCard(s,'size',sim.size===s.id)).join('');
+  document.getElementById('paint-grid').innerHTML = PAINTS.map(p=>optCard(p,'paint',sim.paint===p.id)).join('');
+  document.getElementById('option-grid').innerHTML = OPTIONS.map(o=>optCard(o,'option',sim.options.has(o.id))).join('');
+  calcSim();
+}
+function pickSim(type,id){
+  if(type==='size') sim.size=id;
+  else if(type==='paint') sim.paint=id;
+  else sim.options.has(id)?sim.options.delete(id):sim.options.add(id);
+  renderSim();
+}
+function calcSim(){
+  const size=SIZES.find(s=>s.id===sim.size), paint=PAINTS.find(p=>p.id===sim.paint);
+  let lines=[
+    {n:'外壁塗装一式('+paint.name+')',p:paint.price},
+    {n:'建物規模調整('+size.name+')',p:size.price},
+  ];
+  let total=paint.price+size.price;
+  sim.options.forEach(id=>{const o=OPTIONS.find(x=>x.id===id);lines.push({n:o.name,p:o.price});total+=o.price;});
+  document.getElementById('sum-lines').innerHTML =
+    lines.filter(l=>l.p!==0||l.n.includes('外壁')).map(l=>
+      `<div class="sum-line"><span>${l.n}</span><span class="l-price">${l.p<0?'−'+yen(-l.p):yen(l.p)}</span></div>`).join('')
+    + `<div class="sum-line" style="color:var(--muted)"><span>足場・高圧洗浄・養生・諸経費</span><span class="l-price">込み</span></div>`;
+  const el=document.getElementById('sum-total');
+  el.textContent=yen(total);
+  el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump');
+  setTimeout(()=>el.classList.remove('bump'),250);
+}
+
+/* ================= 予約:担当者 ================= */
+function avatar(skin,hair,hairColor,acc){
+  return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100" height="100" fill="#dcebf7"/>
+    <circle cx="50" cy="42" r="22" fill="${skin}"/>
+    ${hair==='short'?`<path d="M28 40 a22 22 0 0 1 44 0 l-4 -12 a22 16 0 0 0 -36 0 z" fill="${hairColor}"/>`:''}
+    ${hair==='long'?`<path d="M26 44 a24 26 0 0 1 48 0 v18 h-8 v-16 a20 20 0 0 0 -32 0 v16 h-8 z" fill="${hairColor}"/>`:''}
+    ${hair==='cap'?`<path d="M28 38 a22 18 0 0 1 44 0 z" fill="${hairColor}"/><rect x="26" y="35" width="48" height="6" rx="3" fill="${hairColor}"/>`:''}
+    <circle cx="42" cy="44" r="2.6" fill="#3b3b3b"/><circle cx="58" cy="44" r="2.6" fill="#3b3b3b"/>
+    <path d="M43 53 q7 6 14 0" stroke="#b0685a" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    <path d="M20 100 a30 30 0 0 1 60 0 z" fill="${acc}"/>
+    <rect x="44" y="70" width="12" height="10" fill="${skin}"/>
+  </svg>`;
+}
+const STAFF = [
+  {id:'st1', name:'朝日 誠一', role:'代表・一級塗装技能士', greet:'創業28年、社長の私が診断にも伺います。厳しい目でご質問ください。', img:avatar('#f2c9a8','short','#5a5a5a','#33506b')},
+  {id:'st2', name:'佐藤 健太', role:'外壁劣化診断士', greet:'「まだ塗らなくて大丈夫」も正直にお伝えします。お気軽にどうぞ。', img:avatar('#eebd97','cap','#2c5f8a','#e8974f')},
+  {id:'st3', name:'田中 美咲', role:'カラーコーディネーター', greet:'色選びが一番の楽しみどころ。カラーシミュレーション持参します!', img:avatar('#f5d0b3','long','#7a4a2e','#c96f5e')},
+  {id:'st4', name:'鈴木 大輔', role:'雨漏り診断士', greet:'雨漏り・ひび割れの不安、原因からしっかり調べます。', img:avatar('#e8b58d','short','#333','#4a7a5e')},
+  {id:'st5', name:'高橋 由紀', role:'見積もり相談担当', greet:'他社お見積もりの「ここが分からない」の解説だけでも歓迎です。', img:avatar('#f5cdb0','long','#4a4a4a','#5b7c96')},
+];
+const reserve = { staff:null, slot:null };
+function renderStaff(){
+  document.getElementById('staff-scroller').innerHTML = STAFF.map(s=>
+    `<div class="staff-card ${reserve.staff===s.id?'selected':''}" onclick="pickStaff('${s.id}')">
+      <div class="staff-photo">${s.img}</div><h5>${s.name}</h5><div class="role">${s.role}</div><div class="greet">${s.greet}</div></div>`).join('');
+}
+function pickStaff(id){ reserve.staff=id; renderStaff(); updateReserveBox(); }
+function scrollStaff(dir){ document.getElementById('staff-scroller').scrollBy({left:dir*230,behavior:'smooth'}); }
+
+/* ================= 予約:カレンダー ================= */
+const DOW=['日','月','火','水','木','金','土'];
+function buildCalendar(){
+  const hours=[9,10,11,12,13,14,15,16,17];
+  const days=[];
+  const today=new Date();
+  for(let i=1;i<=10;i++){const d=new Date(today);d.setDate(d.getDate()+i);days.push(d);}
+  let html='<tr><th></th>'+days.map(d=>{
+    const w=d.getDay();
+    return `<th>${d.getMonth()+1}/${d.getDate()}<span class="dow ${w===6?'sat':w===0?'sun':''}">${DOW[w]}</span></th>`;
+  }).join('')+'</tr>';
+  hours.forEach(h=>{
+    html+=`<tr><td class="time">${h}:00</td>`+days.map((d,di)=>{
+      const w=d.getDay();
+      const closed = w===3 || h===12 || ((d.getDate()*7+h*3+di)%5===0); // 水曜定休・昼休み・擬似的な埋まり枠
+      const key=`${d.getMonth()+1}/${d.getDate()}(${DOW[w]}) ${h}:00`;
+      return `<td>${closed?'<button class="slot na" disabled>−</button>':`<button class="slot" data-key="${key}" onclick="pickSlot(this)">○</button>`}</td>`;
+    }).join('')+'</tr>';
+  });
+  document.getElementById('cal-table').innerHTML=html;
+}
+function pickSlot(btn){
+  document.querySelectorAll('.slot.selected').forEach(b=>{b.classList.remove('selected');b.textContent='○';});
+  btn.classList.add('selected'); btn.textContent='✓';
+  reserve.slot=btn.dataset.key;
+  updateReserveBox();
+}
+function updateReserveBox(){
+  const s=STAFF.find(x=>x.id===reserve.staff);
+  const parts=[];
+  if(s) parts.push(`👤 担当:${s.name}`);
+  if(reserve.slot) parts.push(`🗓 日時:${reserve.slot}〜(約60分)`);
+  document.getElementById('reserve-selected').textContent =
+    parts.length?parts.join('  /  '):'担当者と日時を選ぶと、ここに予約内容が表示されます。';
+}
+function submitReserve(){
+  const name=document.getElementById('f-name').value.trim();
+  const tel=document.getElementById('f-tel').value.trim();
+  if(!reserve.staff) return toast('担当者を指名してください(STEP 1)');
+  if(!reserve.slot) return toast('ご希望の日時を選んでください(STEP 2)');
+  if(!name||!tel) return toast('お名前と電話番号をご入力ください');
+  const s=STAFF.find(x=>x.id===reserve.staff);
+  toast(`予約を受け付けました。${s.name}より確認のご連絡をいたします。`);
+}
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  clearTimeout(t._tm); t._tm=setTimeout(()=>t.classList.remove('show'),3200);
+}
+
+/* ================= 施工事例 ================= */
+function houseThumb(wall,roof,sky){
+  return `<svg viewBox="0 0 300 170" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <rect width="300" height="170" fill="${sky}"/>
+    <ellipse cx="60" cy="30" rx="34" ry="10" fill="#fff" opacity=".8"/>
+    <ellipse cx="230" cy="45" rx="28" ry="8" fill="#fff" opacity=".6"/>
+    <rect y="150" width="300" height="20" fill="#9bb3a2"/>
+    <polygon points="150,38 68,95 232,95" fill="${roof}"/>
+    <rect x="82" y="95" width="136" height="60" fill="${wall}"/>
+    <rect x="98" y="108" width="26" height="22" rx="3" fill="#b8d5ea"/>
+    <rect x="176" y="108" width="26" height="22" rx="3" fill="#b8d5ea"/>
+    <rect x="138" y="118" width="24" height="37" rx="3" fill="#5b7c96"/>
+  </svg>`;
+}
+const WORKS = [
+  {id:'w1', tag:'外壁+屋根塗装', title:'旭市 K様邸(築14年)', sum:'ラジカルシリコン/淡いベージュ→クリームホワイト', img:houseThumb('#f3ead7','#5d82a1','#cfe4f2'),
+   detail:{塗料:'ラジカルシリコン(外壁)+遮熱シリコン(屋根)', 工期:'12日間', 費用:'約102万円(足場・シーリング込み)', 内容:'チョーキングとシーリングのひび割れが進行していたため、打ち替えのうえ塗装。屋根は遮熱塗料をご提案しました。'},
+   voice:{stars:5, head:'K様(50代・ご夫婦)', text:'3社の相見積もりでしたが、劣化診断の説明が一番具体的だったのが決め手。工事中も毎日写真つきで報告があり、安心して任せられました。2階の夏の暑さが和らいだのもうれしい誤算です。'}},
+  {id:'w2', tag:'外壁塗装', title:'銚子市 M様邸(築11年)', sum:'シリコン/ライトグレー→ネイビー×ホワイト', img:houseThumb('#3f5d7a','#37485c','#dceaf5'),
+   detail:{塗料:'シリコン(2色塗り分け)', 工期:'10日間', 費用:'約76万円', 内容:'カラーシミュレーションで3案をご提案し、ツートンに。1階と2階の塗り分けで新築のような印象になりました。'},
+   voice:{stars:5, head:'M様(40代・子育て世帯)', text:'色選びで悩みすぎていた私たちに、近所の施工例を実際に案内してくれました。仕上がりを見た息子の「うちが一番かっこいい」が全てです(笑)。'}},
+  {id:'w3', tag:'屋根+雨樋交換', title:'匝瑳市 S様邸(築22年)', sum:'フッ素/雨樋全交換・軒天補修', img:houseThumb('#efe6d2','#8a4f3d','#f2e3cf'),
+   detail:{塗料:'フッ素(屋根)+ケンエース(軒天)', 工期:'14日間', 費用:'約118万円', 内容:'雨樋の歪みによる雨垂れ跡が外壁に発生。塗装では直らない箇所は交換をご提案し、原因から解消しました。'},
+   voice:{stars:4, head:'S様(70代)', text:'「ここは塗らなくても大丈夫」とはっきり言ってくれたのが信用できた。年金暮らしの予算にも親身に相談に乗ってもらえました。'}},
+  {id:'w4', tag:'外壁+ベランダ防水', title:'旭市 T様邸(築16年)', sum:'無機/最高耐久プラン', img:houseThumb('#e8eef2','#4a6f8f','#d8ecf7'),
+   detail:{塗料:'無機(外壁)+ウレタン防水(ベランダ)', 工期:'13日間', 費用:'約134万円', 内容:'「次の塗り替えを最後にしたい」とのご希望で無機塗料を採用。ベランダの防水層も同時にメンテナンスしました。'},
+   voice:{stars:5, head:'T様(60代)', text:'高い買い物なので何度も質問しましたが、営業の高橋さんが毎回図解つきで答えてくれました。10年保証の点検も楽しみにしています。'}},
+  {id:'w5', tag:'外壁塗装', title:'香取市 Y様邸(築13年)', sum:'ラジカルシリコン/色褪せ・コケの改善', img:houseThumb('#f7f2e6','#5d82a1','#cfe8dd'),
+   detail:{塗料:'ラジカルシリコン+バイオ洗浄', 工期:'11日間', 費用:'約89万円', 内容:'北面のコケ・藻が目立ったため、バイオ高圧洗浄で根から除去してから塗装。防藻性の高い塗料を選定しました。'},
+   voice:{stars:5, head:'Y様(30代)', text:'初めてで相場も何も分からず、まずHPのシミュレーションを使いました。実際の見積もりがシミュレーションとほぼ同じで、逆にびっくり。'}},
+  {id:'w6', tag:'シーリング+部分補修', title:'東庄町 O様邸(築9年)', sum:'打ち替え+ひび割れ補修のみ', img:houseThumb('#ede7da','#6b8aa5','#e6eff7'),
+   detail:{塗料:'ー(シーリング・補修工事)', 工期:'3日間', 費用:'約28万円', 内容:'診断の結果、外壁塗装はまだ不要と判断。劣化していたシーリングとクラック補修のみ行い、塗装は3〜4年後をご提案しました。'},
+   voice:{stars:5, head:'O様(40代)', text:'他社では「今すぐ全面塗装を」と言われましたが、こちらは「まだ早い」と。売り込まない誠実さに、次回は必ずお願いすると決めています。'}},
+];
+function workCard(w,click){
+  return `<div class="work-card" onclick="${click}('${w.id}')">
+      <div class="work-thumb">${w.img}</div>
+      <div class="work-body"><span class="tag">${w.tag}</span><h5>${w.title}</h5><p>${w.sum}</p><div class="work-more">施工内容とお客様の声を見る →</div></div></div>`;
+}
+function renderWorks(){
+  document.getElementById('works-scroller').innerHTML = WORKS.map(w=>workCard(w,'openWork')).join('');
+  document.getElementById('works-scroller-home').innerHTML = WORKS.map(w=>workCard(w,'gotoWork')).join('');
+}
+function gotoWork(id){ showPage('works'); openWork(id); }
+function scrollWorks(dir,id){ document.getElementById(id||'works-scroller').scrollBy({left:dir*320,behavior:'smooth'}); }
+function openWork(id){
+  const w=WORKS.find(x=>x.id===id);
+  document.getElementById('modal-content').innerHTML =
+    `<span class="tag">${w.tag}</span><h3>${w.title}</h3>
+     <div class="modal-thumb">${w.img}</div>
+     <dl>${Object.entries(w.detail).map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>
+     <div class="voice-box"><div class="stars">${'★'.repeat(w.voice.stars)}${'☆'.repeat(5-w.voice.stars)}</div>
+       <div class="v-head">お客様の声|${w.voice.head}</div><p>${w.voice.text}</p></div>`;
+  document.getElementById('modal-bg').classList.add('open');
+}
+function closeModal(){ document.getElementById('modal-bg').classList.remove('open'); }
+
+/* 施工件数カウントアップ */
+function countUp(el){
+  if(!el||el.dataset.done) return; el.dataset.done='1';
+  const target=2850, dur=1200, t0=performance.now();
+  (function step(t){
+    const r=Math.min((t-t0)/dur,1), v=Math.floor(target*(1-Math.pow(1-r,3)));
+    el.innerHTML=v.toLocaleString('ja-JP')+'<small>件</small>';
+    if(r<1) requestAnimationFrame(step);
+  })(t0);
+}
+const _showPage=showPage;
+showPage=function(id){ _showPage(id); if(id==='works') countUp(document.getElementById('work-count')); };
+new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)countUp(e.target);}),{threshold:.4})
+  .observe(document.getElementById('work-count-home'));
+
+/* 初期化 */
+renderSim(); renderStaff(); buildCalendar(); renderWorks(); updateReserveBox();
+document.querySelector('.nav-link[data-page="home"]').classList.add('active');
+</script>
+</body>
+</html>
