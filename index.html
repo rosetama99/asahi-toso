@@ -60,7 +60,7 @@ html.snap footer{scroll-snap-align:end;}
 @media(max-width:820px){html.snap{scroll-snap-type:none;}}
 #sec-mitsumori{background:url('egao.jpg') center/cover no-repeat;}
 #sec-kaisha{background:url('syuugou.jpg') center/cover no-repeat;}
-#sec-jirei{background:#fff url('chiba.jpg') center/cover no-repeat;}
+#sec-jirei{background:#fff url('chiba.jpg?v=2') center/cover no-repeat;}
 #sec-kaisha{justify-content:flex-end;padding-top:130px;padding-bottom:85px;}
 #sec-kaisha .section-title{margin-top:0;}
 #sec-kaisha .section-sub{margin-bottom:14px;}
@@ -1029,7 +1029,8 @@ window.addEventListener('hashchange',function(){
   if(document.getElementById('page-'+id)){
     _showPageNav(id);
     if(id==='home'&&_homeSec!=='hero'){
-      setTimeout(function(){const el=document.getElementById(_homeSec);if(el)el.scrollIntoView();},80);
+      const el=document.getElementById(_homeSec);
+      if(el){ el.scrollIntoView(); setNavSec(_homeSec); }
     }
   }
 });
